@@ -84,7 +84,7 @@ public class RootBeer {
     public boolean detectRootManagementApps(String[] additionalRootManagementApps) {
 
         // Create a list of package names to iterate over from constants any others provided
-        ArrayList<String> packages = new ArrayList<>();
+        ArrayList<String> packages = new ArrayList<String>();
         packages.addAll(Arrays.asList(Const.knownRootAppsPackages));
         if (additionalRootManagementApps!=null && additionalRootManagementApps.length>0){
             packages.addAll(Arrays.asList(additionalRootManagementApps));
@@ -109,7 +109,7 @@ public class RootBeer {
     public boolean detectPotentiallyDangerousApps(String[] additionalDangerousApps) {
 
         // Create a list of package names to iterate over from constants any others provided
-        ArrayList<String> packages = new ArrayList<>();
+        ArrayList<String> packages = new ArrayList<String>();
         packages.addAll(Arrays.asList(Const.knownDangerousAppsPackages));
         if (additionalDangerousApps!=null && additionalDangerousApps.length>0){
             packages.addAll(Arrays.asList(additionalDangerousApps));
@@ -135,7 +135,7 @@ public class RootBeer {
     public boolean detectRootCloakingApps(String[] additionalRootCloakingApps) {
 
         // Create a list of package names to iterate over from constants any others provided
-        ArrayList<String> packages = new ArrayList<>();
+        ArrayList<String> packages = new ArrayList<String>();
         packages.addAll(Arrays.asList(Const.knownRootCloakingPackages));
         if (additionalRootCloakingApps!=null && additionalRootCloakingApps.length>0){
             packages.addAll(Arrays.asList(additionalRootCloakingApps));
@@ -199,7 +199,9 @@ public class RootBeer {
             InputStream inputstream = Runtime.getRuntime().exec("getprop").getInputStream();
             String propVal = new Scanner(inputstream).useDelimiter("\\A").next();
             result = propVal.split("\n");
-        } catch (IOException | NoSuchElementException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
         return result;
@@ -211,7 +213,9 @@ public class RootBeer {
             InputStream inputstream = Runtime.getRuntime().exec("mount").getInputStream();
             String propVal = new Scanner(inputstream).useDelimiter("\\A").next();
             result = propVal.split("\n");
-        } catch (IOException | NoSuchElementException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
         return result;
@@ -247,7 +251,7 @@ public class RootBeer {
      */
     public boolean checkForDangerousProps() {
 
-        final Map<String, String> dangerousProps = new HashMap<>();
+        final Map<String, String> dangerousProps = new HashMap<String, String>();
         dangerousProps.put("ro.debuggable", "1");
         dangerousProps.put("ro.secure", "0");
 
